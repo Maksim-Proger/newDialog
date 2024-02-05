@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.project.newdialog.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,14 +22,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         createDrawerNavigation()
+
+        // Настраиваем открытие первого фрагмента по умолчанию
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, FirstFragment())
+            .commit()
     }
 
     private fun createDrawerNavigation() {
         val mDrawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val mDrawerList: ListView = findViewById(R.id.drawer_list)
         val drawerItems: MutableList<String> = mutableListOf(
-            "Item 1",
-            "Item 2"
+            "First Fragment",
+            "Second Fragment"
         )
 
         val adapter: DrawerListAdapter = DrawerListAdapter(
@@ -40,8 +46,10 @@ class MainActivity : AppCompatActivity() {
             // Здесь можно добавить код для обработки нажатий на пункты меню
             // Например, переход на другую активность или выполнение определенных действий
 
-            when (position) {}
-
+            when (position) {
+                0 -> replaceFragment(FirstFragment())
+                1 -> replaceFragment(SecondFragment())
+            }
         }
 
 
@@ -69,6 +77,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_content, fragment)
+            .commit()
+    }
 
 }
