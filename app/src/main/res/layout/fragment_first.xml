@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/fragment1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Fragment 1" />
+        android:text="Fragment 1"
+        android:gravity="center"/>
 
 </FrameLayout>
